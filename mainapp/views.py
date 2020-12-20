@@ -1,30 +1,19 @@
 from django.shortcuts import render
+
 from mainapp.models import Product, ProductCategory
 
 
-def index(request):
-    context = {
-        "title": "Магазин от Django",
+def main(request):
+    content = {
+        'title': 'GeekShop'
     }
-    return render(request, 'mainapp/index.html', context)
+    return render(request, 'mainapp/index.html', content)
 
 
-def products(request):
-    context = {
+def products(request, id=None):
+    content = {
+        'title': 'GeekShop - Категории',
+        'categories': ProductCategory.objects.all(),
         'products': Product.objects.all(),
     }
-    return render(request, 'mainapp/products.html', context=context)
-
-def test_context(request):
-    context = {
-        'title': 'Hello dude',
-        'username': 'Pavel',
-        'products': [
-            {'name': 'Black shirt', 'price': '2300$'},
-            {'name': 'White jeans', 'price': '4100$'},
-        ],
-        'promotion_products': [
-        ],
-    }
-
-    return render(request, 'mainapp/context.html', context)
+    return render(request, 'mainapp/products.html', content)
